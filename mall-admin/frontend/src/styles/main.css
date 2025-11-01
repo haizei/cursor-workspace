@@ -1,0 +1,163 @@
+/* 全局样式 */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* 页面容器 */
+.page-container {
+  padding: 20px;
+  background-color: #f0f2f5;
+  min-height: calc(100vh - 60px);
+}
+
+/* 卡片样式 */
+.page-card {
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* 搜索栏 */
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-bar .el-form-item {
+  margin-bottom: 0;
+}
+
+/* 表格操作按钮 */
+.table-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* 状态标签 */
+.status-tag {
+  cursor: default;
+}
+
+/* 图片预览 */
+.table-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 统计卡片 */
+.stat-card {
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card .stat-value {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.stat-card .stat-label {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* 图表容器 */
+.chart-container {
+  height: 400px;
+  margin-top: 20px;
+}
+
+/* 表单样式 */
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 图片上传 */
+.image-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+
+.image-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 148px;
+  height: 148px;
+  line-height: 148px;
+  text-align: center;
+}
+
+.image-preview {
+  width: 148px;
+  height: 148px;
+  display: block;
+  object-fit: cover;
+}
+
+/* 多图上传 */
+.multi-image-uploader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.multi-image-item {
+  position: relative;
+  width: 148px;
+  height: 148px;
+}
+
+.multi-image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.multi-image-item .remove-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 10px;
+  }
+  
+  .search-bar .el-form-item {
+    margin-bottom: 15px;
+  }
+}
