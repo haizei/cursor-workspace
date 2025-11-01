@@ -1,0 +1,139 @@
+/* 全局样式 */
+
+/* 页面容器 */
+.page-container {
+  padding: 20px;
+}
+
+/* 搜索表单 */
+.search-form {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.search-form .el-form-item {
+  margin-bottom: 0;
+}
+
+/* 表格容器 */
+.table-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+/* 操作按钮组 */
+.toolbar {
+  margin-bottom: 20px;
+}
+
+/* 表格图片 */
+.table-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* 状态标签 */
+.status-tag {
+  display: inline-block;
+}
+
+/* 分页器 */
+.pagination {
+  margin-top: 20px;
+  text-align: right;
+}
+
+/* 表单容器 */
+.form-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+/* 卡片 */
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* 统计卡片 */
+.stat-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
+}
+
+.stat-card .stat-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.stat-card .stat-value {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-card .stat-label {
+  font-size: 14px;
+  color: #999;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 50px 0;
+  color: #999;
+}
+
+/* 图片上传 */
+.image-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+
+.image-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 148px;
+  height: 148px;
+  line-height: 148px;
+  text-align: center;
+}
+
+.image-preview {
+  width: 148px;
+  height: 148px;
+  display: block;
+  object-fit: cover;
+}
