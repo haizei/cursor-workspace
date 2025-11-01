@@ -1,0 +1,329 @@
+========================================
+后端API服务项目目录结构
+========================================
+
+backend-api/                          # 后端API服务根目录
+│
+├── package.json                      # 项目配置文件
+│                                     # - 项目名称、版本
+│                                     # - 依赖包列表
+│                                     # - 启动脚本
+│
+├── .env                             # 环境变量配置文件（不提交到Git）
+│                                     # - 数据库连接信息
+│                                     # - JWT密钥
+│                                     # - API端口号
+│
+├── .env.example                     # 环境变量示例文件（提交到Git）
+│                                     # - 示例配置格式
+│                                     # - 不含敏感信息
+│
+├── .gitignore                       # Git忽略文件配置
+│
+├── server.js                         # 服务器入口文件
+│                                     # - 启动Express服务器
+│                                     # - 连接数据库
+│                                     # - 加载中间件和路由
+│
+├── app.js                            # 应用主文件（可选，整合到server.js）
+│
+├── config/                           # 配置文件目录
+│   │
+│   ├── index.js                     # 主配置文件
+│   │                                 # - 加载环境变量
+│   │                                 # - 导出配置对象
+│   │
+│   ├── database.js                  # 数据库配置
+│   │                                 # - MySQL连接配置
+│   │                                 # - MongoDB连接配置（如果使用）
+│   │
+│   └── constants.js                 # 常量配置
+│                                   # - 订单状态常量
+│                                   # - 错误码定义
+│                                   # - 其他常量
+│
+├── routes/                           # 路由目录（API接口）
+│   │
+│   ├── index.js                     # 路由入口文件
+│   │                                 # - 注册所有路由
+│   │                                 # - 统一路由前缀
+│   │
+│   ├── banner.js                    # 轮播图相关路由
+│   │                                 # - GET /api/banner/list
+│   │
+│   ├── category.js                  # 分类相关路由
+│   │                                 # - GET /api/category/list
+│   │
+│   ├── goods.js                     # 商品相关路由
+│   │                                 # - GET /api/goods/list
+│   │                                 # - GET /api/goods/detail
+│   │                                 # - GET /api/goods/recommend
+│   │
+│   ├── cart.js                      # 购物车相关路由
+│   │                                 # - GET /api/cart/list
+│   │                                 # - POST /api/cart/add
+│   │                                 # - PUT /api/cart/update
+│   │                                 # - DELETE /api/cart/delete
+│   │
+│   ├── order.js                     # 订单相关路由
+│   │                                 # - GET /api/order/list
+│   │                                 # - GET /api/order/detail
+│   │                                 # - POST /api/order/create
+│   │                                 # - POST /api/order/confirm
+│   │
+│   ├── user.js                      # 用户相关路由
+│   │                                 # - POST /api/user/wxlogin
+│   │                                 # - GET /api/user/info
+│   │                                 # - POST /api/user/logout
+│   │
+│   └── address.js                   # 收货地址相关路由
+│                                   # - GET /api/address/list
+│                                   # - POST /api/address/save
+│                                   # - DELETE /api/address/delete
+│                                   # - PUT /api/address/setdefault
+│
+├── controllers/                      # 控制器目录（业务逻辑）
+│   │
+│   ├── bannerController.js          # 轮播图控制器
+│   │                                 # - 获取轮播图列表
+│   │                                 # - 业务逻辑处理
+│   │
+│   ├── categoryController.js        # 分类控制器
+│   │                                 # - 获取分类列表
+│   │                                 # - 获取分类下的商品
+│   │
+│   ├── goodsController.js           # 商品控制器
+│   │                                 # - 获取商品列表
+│   │                                 # - 获取商品详情
+│   │                                 # - 获取推荐商品
+│   │
+│   ├── cartController.js            # 购物车控制器
+│   │                                 # - 添加商品到购物车
+│   │                                 # - 更新购物车商品数量
+│   │                                 # - 删除购物车商品
+│   │                                 # - 获取购物车列表
+│   │
+│   ├── orderController.js           # 订单控制器
+│   │                                 # - 创建订单
+│   │                                 # - 获取订单列表
+│   │                                 # - 获取订单详情
+│   │                                 # - 订单确认
+│   │
+│   ├── userController.js            # 用户控制器
+│   │                                 # - 微信登录
+│   │                                 # - 获取用户信息
+│   │                                 # - 退出登录
+│   │
+│   └── addressController.js        # 地址控制器
+│                                   # - 获取地址列表
+│                                   # - 保存地址
+│                                   # - 删除地址
+│                                   # - 设置默认地址
+│
+├── models/                           # 数据模型目录（数据库操作）
+│   │
+│   ├── index.js                     # 模型入口文件
+│   │                                 # - 数据库连接
+│   │                                 # - 导出所有模型
+│   │
+│   ├── Banner.js                    # 轮播图模型
+│   │                                 # - 数据表结构定义
+│   │                                 # - 数据库操作方法
+│   │
+│   ├── Category.js                  # 分类模型
+│   │
+│   ├── Goods.js                     # 商品模型
+│   │
+│   ├── Cart.js                      # 购物车模型
+│   │
+│   ├── Order.js                     # 订单模型
+│   │
+│   ├── OrderItem.js                 # 订单商品模型
+│   │
+│   ├── User.js                      # 用户模型
+│   │
+│   └── Address.js                   # 地址模型
+│
+├── middleware/                       # 中间件目录
+│   │
+│   ├── auth.js                      # 认证中间件
+│   │                                 # - 验证用户Token
+│   │                                 # - 解析用户信息
+│   │
+│   ├── errorHandler.js              # 错误处理中间件
+│   │                                 # - 统一错误处理
+│   │                                 # - 错误日志记录
+│   │
+│   ├── validator.js                 # 参数验证中间件
+│   │                                 # - 验证请求参数
+│   │                                 # - 返回验证错误
+│   │
+│   ├── rateLimiter.js               # 限流中间件（防止接口被刷）
+│   │                                 # - 限制请求频率
+│   │                                 # - IP白名单/黑名单
+│   │
+│   └── logger.js                    # 日志中间件
+│                                   # - 记录请求日志
+│                                   # - 记录响应日志
+│
+├── utils/                            # 工具函数目录
+│   │
+│   ├── jwt.js                       # JWT工具函数
+│   │                                 # - 生成Token
+│   │                                 # - 验证Token
+│   │                                 # - 解析Token
+│   │
+│   ├── crypto.js                    # 加密工具函数
+│   │                                 # - 密码加密（bcrypt）
+│   │                                 # - 数据加密解密
+│   │
+│   ├── response.js                  # 响应格式化工具
+│   │                                 # - 统一返回格式
+│   │                                 # - 成功响应
+│   │                                 # - 错误响应
+│   │
+│   ├── validator.js                 # 数据验证工具
+│   │                                 # - 手机号验证
+│   │                                 # - 邮箱验证
+│   │                                 # - 其他验证规则
+│   │
+│   ├── logger.js                    # 日志工具
+│   │                                 # - 日志记录方法
+│   │                                 # - 日志级别控制
+│   │
+│   └── date.js                      # 日期处理工具
+│                                   # - 日期格式化
+│                                   # - 日期计算
+│
+├── services/                         # 服务层目录（可选，复杂业务逻辑）
+│   │
+│   ├── wechatService.js            # 微信服务
+│   │                                 # - 微信登录
+│   │                                 # - 微信支付
+│   │                                 # - 微信消息推送
+│   │
+│   └── paymentService.js           # 支付服务
+│                                   # - 支付接口封装
+│                                   # - 支付回调处理
+│
+├── validators/                       # 验证规则目录（可选）
+│   │
+│   ├── goodsValidator.js           # 商品相关验证规则
+│   │
+│   ├── orderValidator.js           # 订单相关验证规则
+│   │
+│   └── addressValidator.js         # 地址相关验证规则
+│
+├── logs/                            # 日志目录（运行时生成）
+│   ├── error.log                   # 错误日志
+│   ├── access.log                  # 访问日志
+│   └── ...
+│
+├── uploads/                         # 上传文件目录（运行时生成）
+│                                     # - 商品图片
+│                                     # - 用户头像
+│                                     # - 其他上传文件
+│
+├── tests/                           # 测试目录（可选）
+│   ├── unit/                        # 单元测试
+│   ├── integration/                 # 集成测试
+│   └── api/                         # API测试
+│
+└── README.md                        # 项目说明文档
+
+
+【重要文件说明】
+
+1. server.js - 服务器入口
+   主要功能：
+   - 引入Express框架
+   - 加载配置和中间件
+   - 注册路由
+   - 启动服务器监听端口
+
+2. config/database.js - 数据库配置
+   示例代码：
+   - MySQL连接配置
+   - 连接池配置
+   - 数据库连接测试
+
+3. middleware/auth.js - 认证中间件
+   功能：
+   - 验证请求头中的Token
+   - 解析用户信息
+   - 将用户信息添加到请求对象
+
+4. utils/response.js - 统一响应格式
+   返回格式：
+   {
+     code: 200,
+     message: "成功",
+     data: {}
+   }
+
+5. routes/ - 路由文件
+   职责：
+   - 定义API路径
+   - 调用对应的控制器
+   - 添加中间件（认证、验证等）
+
+6. controllers/ - 控制器
+   职责：
+   - 处理业务逻辑
+   - 调用模型层操作数据库
+   - 返回数据给路由
+
+7. models/ - 模型层
+   职责：
+   - 定义数据表结构
+   - 封装数据库操作方法
+   - 数据验证和处理
+
+
+【目录命名规范】
+
+1. 文件命名：使用驼峰命名法（camelCase）
+   - 例如：goodsController.js、orderController.js
+
+2. 目录命名：使用小写字母
+   - 例如：controllers、middleware、utils
+
+3. 类名命名：使用大驼峰命名法（PascalCase）
+   - 例如：Banner、Goods、Order
+
+
+【开发建议】
+
+1. 代码分层
+   - 路由层：只负责路由定义和参数验证
+   - 控制器层：处理业务逻辑
+   - 模型层：数据库操作
+   - 工具层：通用工具函数
+
+2. 错误处理
+   - 统一使用错误处理中间件
+   - 记录错误日志
+   - 返回友好的错误信息
+
+3. 安全性
+   - 所有用户输入都要验证
+   - 使用参数化查询防止SQL注入
+   - 敏感信息加密存储
+   - 接口添加限流保护
+
+4. 代码规范
+   - 使用ESLint规范代码
+   - 统一代码风格
+   - 添加必要注释
+   - 遵循最佳实践
+
+5. 数据库操作
+   - 使用连接池管理数据库连接
+   - 所有查询使用参数化查询
+   - 事务处理（重要操作）
+   - 数据库索引优化
+
+========================================
+文档结束
+========================================
+

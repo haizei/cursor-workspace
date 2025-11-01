@@ -1,0 +1,493 @@
+========================================
+MySQL 本地安装指南（macOS）
+========================================
+
+【方法一：使用 Homebrew 安装（推荐）】
+----------------------------------------
+
+步骤1：安装 Homebrew（如果还没有）
+--------------------------------
+打开终端（Terminal），执行：
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+
+步骤2：安装 MySQL
+--------------------------------
+执行以下命令：
+
+brew install mysql
+
+
+步骤3：启动 MySQL 服务
+--------------------------------
+安装完成后，启动 MySQL：
+
+brew services start mysql
+
+或者手动启动（不自动启动）：
+
+mysql.server start
+
+
+步骤4：设置 root 密码（首次安装）
+--------------------------------
+执行安全配置脚本：
+
+mysql_secure_installation
+
+按提示进行以下设置：
+- 设置 root 密码
+- 删除匿名用户
+- 禁止 root 远程登录（可选）
+- 删除测试数据库
+- 重新加载权限表
+
+
+步骤5：验证安装
+--------------------------------
+登录 MySQL：
+
+mysql -u root -p
+
+输入刚才设置的密码，如果能看到 MySQL 提示符（mysql>），说明安装成功。
+
+
+【方法二：使用 MySQL 官方安装包】
+----------------------------------------
+
+步骤1：下载安装包
+--------------------------------
+访问 MySQL 官网：
+https://dev.mysql.com/downloads/mysql/
+
+选择 macOS 版本，下载 .dmg 安装包：
+- 推荐下载 MySQL Community Server 8.0 或 5.7 版本
+
+
+步骤2：安装
+--------------------------------
+1. 双击下载的 .dmg 文件
+2. 双击 .pkg 安装包
+3. 按照安装向导操作：
+   - 点击"继续"
+   - 选择"安装"
+   - 输入管理员密码
+   - 等待安装完成
+
+
+步骤3：配置
+--------------------------------
+安装完成后，系统偏好设置中会出现 MySQL 图标：
+1. 打开"系统偏好设置" → "MySQL"
+2. 点击"Start MySQL Server"启动服务
+3. 可以设置开机自动启动
+
+
+步骤4：设置 root 密码
+--------------------------------
+打开终端，执行：
+
+mysql -u root -p
+
+首次登录可能不需要密码（直接回车），或者密码在安装过程中已设置。
+
+如果需要修改密码：
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY '你的新密码';
+
+
+【方法三：使用 Docker 安装（适合开发者）】
+----------------------------------------
+
+步骤1：安装 Docker Desktop
+--------------------------------
+如果还没有 Docker，先安装：
+https://www.docker.com/products/docker-desktop
+
+
+步骤2：运行 MySQL 容器
+--------------------------------
+打开终端，执行：
+
+docker run -d \
+  --name mysql \
+  -p 3306:3306 \
+  -e MYSQL_ROOT_PASSWORD=root123 \
+  -e MYSQL_DATABASE=mall_db \
+  mysql:8.0
+
+参数说明：
+- --name mysql：容器名称
+- -p 3306:3306：端口映射
+- -e MYSQL_ROOT_PASSWORD：root 密码
+- -e MYSQL_DATABASE：初始创建的数据库名
+- mysql:8.0：MySQL 版本
+
+
+步骤3：连接 MySQL
+--------------------------------
+执行：
+
+docker exec -it mysql mysql -u root -p
+
+输入密码：root123
+
+
+【安装后的配置】
+----------------------------------------
+
+1. 验证 MySQL 服务状态
+--------------------------------
+使用 Homebrew 安装的：
+
+brew services list
+
+应该看到 mysql 状态为 started
+
+
+使用官方安装包的：
+
+在"系统偏好设置" → "MySQL" 中查看状态
+
+
+使用 Docker 的：
+
+docker ps
+
+应该看到 mysql 容器在运行
+
+
+2. 测试连接
+--------------------------------
+打开终端，执行：
+
+mysql -u root -p
+
+输入密码，如果成功登录，说明 MySQL 正常工作。
+
+
+3. 查看 MySQL 版本
+--------------------------------
+登录后执行：
+
+SELECT VERSION();
+
+
+4. 创建项目数据库
+--------------------------------
+登录 MySQL 后，执行：
+
+CREATE DATABASE mall_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+查看所有数据库：
+
+SHOW DATABASES;
+
+使用数据库：
+
+USE mall_db;
+
+
+【常用 MySQL 命令】
+----------------------------------------
+
+登录 MySQL：
+--------------------------------
+mysql -u root -p
+
+
+查看所有数据库：
+--------------------------------
+SHOW DATABASES;
+
+
+创建数据库：
+--------------------------------
+CREATE DATABASE 数据库名 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
+删除数据库：
+--------------------------------
+DROP DATABASE 数据库名;
+
+
+使用数据库：
+--------------------------------
+USE 数据库名;
+
+
+查看当前数据库的所有表：
+--------------------------------
+SHOW TABLES;
+
+
+查看表结构：
+--------------------------------
+DESCRIBE 表名;
+或
+SHOW CREATE TABLE 表名;
+
+
+退出 MySQL：
+--------------------------------
+EXIT;
+或
+QUIT;
+
+
+【启动和停止 MySQL 服务】
+----------------------------------------
+
+使用 Homebrew 安装的：
+--------------------------------
+启动：
+brew services start mysql
+
+停止：
+brew services stop mysql
+
+重启：
+brew services restart mysql
+
+
+使用官方安装包的：
+--------------------------------
+在"系统偏好设置" → "MySQL" 中操作：
+- Start MySQL Server
+- Stop MySQL Server
+
+
+使用 Docker 的：
+--------------------------------
+启动：
+docker start mysql
+
+停止：
+docker stop mysql
+
+重启：
+docker restart mysql
+
+
+【配置文件位置】
+----------------------------------------
+
+Homebrew 安装：
+--------------------------------
+配置文件：/usr/local/etc/my.cnf
+或：/opt/homebrew/etc/my.cnf（Apple Silicon Mac）
+
+
+官方安装包：
+--------------------------------
+配置文件：/etc/my.cnf
+或：/usr/local/mysql/my.cnf
+
+
+Docker：
+--------------------------------
+配置文件在容器内：/etc/mysql/my.cnf
+
+
+【连接到项目的配置】
+----------------------------------------
+
+在你的后端项目（backend-api）中，创建或修改配置文件：
+
+config/database.js
+--------------------------------
+module.exports = {
+  host: 'localhost',        // 数据库地址
+  port: 3306,              // 端口（默认3306）
+  user: 'root',            // 用户名
+  password: '你的密码',    // 密码
+  database: 'mall_db',     // 数据库名
+  charset: 'utf8mb4',      // 字符集
+  timezone: '+08:00'       // 时区
+};
+
+
+.env 文件配置：
+--------------------------------
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=你的密码
+DB_NAME=mall_db
+
+
+【安装 MySQL 客户端工具（可选）】
+----------------------------------------
+
+1. MySQL Workbench（官方工具）
+--------------------------------
+下载地址：
+https://dev.mysql.com/downloads/workbench/
+
+图形化界面，方便管理数据库
+
+
+2. Navicat for MySQL
+--------------------------------
+功能强大的数据库管理工具
+https://www.navicat.com/
+
+
+3. TablePlus（推荐，Mac 友好）
+--------------------------------
+现代化数据库管理工具
+https://tableplus.com/
+
+
+4. DBeaver（免费开源）
+--------------------------------
+跨平台数据库工具
+https://dbeaver.io/
+
+
+【常见问题解决】
+----------------------------------------
+
+问题1：找不到 mysql 命令
+--------------------------------
+解决方法：
+1. 确认 MySQL 已正确安装
+2. 检查 PATH 环境变量：
+   echo $PATH
+
+3. 如果是 Homebrew 安装，可能需要添加路径：
+   echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshrc
+   source ~/.zshrc
+
+
+问题2：无法连接 MySQL
+--------------------------------
+解决方法：
+1. 确认 MySQL 服务已启动：
+   brew services list
+
+2. 检查端口是否被占用：
+   lsof -i :3306
+
+3. 检查防火墙设置
+
+
+问题3：忘记 root 密码
+--------------------------------
+解决方法（Homebrew 安装）：
+
+1. 停止 MySQL 服务：
+   brew services stop mysql
+
+2. 启动 MySQL 跳过权限表：
+   mysqld_safe --skip-grant-tables &
+
+3. 登录 MySQL（无需密码）：
+   mysql -u root
+
+4. 重置密码：
+   USE mysql;
+   UPDATE user SET authentication_string=PASSWORD('新密码') WHERE User='root';
+   FLUSH PRIVILEGES;
+   EXIT;
+
+5. 重启 MySQL：
+   brew services restart mysql
+
+
+问题4：端口 3306 已被占用
+--------------------------------
+解决方法：
+
+1. 查找占用进程：
+   lsof -i :3306
+
+2. 杀死进程（替换 PID 为实际进程ID）：
+   kill -9 PID
+
+3. 或者修改 MySQL 端口（在配置文件中）
+
+
+【性能优化建议（可选）】
+----------------------------------------
+
+修改 MySQL 配置文件（/usr/local/etc/my.cnf）：
+
+[mysqld]
+# 字符集
+character-set-server=utf8mb4
+collation-server=utf8mb4_unicode_ci
+
+# 连接数
+max_connections=200
+
+# 缓存大小（根据服务器内存调整）
+innodb_buffer_pool_size=1G
+
+# 慢查询日志
+slow_query_log=1
+slow_query_log_file=/var/log/mysql/slow.log
+long_query_time=2
+
+修改后需要重启 MySQL：
+brew services restart mysql
+
+
+【测试数据库连接（Node.js）】
+----------------------------------------
+
+安装 MySQL 驱动：
+
+npm install mysql2
+
+创建测试文件 test-db.js：
+
+const mysql = require('mysql2/promise');
+
+async function testConnection() {
+  try {
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      port: 3306,
+      user: 'root',
+      password: '你的密码',
+      database: 'mall_db'
+    });
+    
+    console.log('✅ 数据库连接成功！');
+    
+    const [rows] = await connection.execute('SELECT VERSION()');
+    console.log('MySQL 版本：', rows[0]['VERSION()']);
+    
+    await connection.end();
+  } catch (error) {
+    console.error('❌ 数据库连接失败：', error.message);
+  }
+}
+
+testConnection();
+
+运行测试：
+
+node test-db.js
+
+
+【下一步】
+----------------------------------------
+
+安装好 MySQL 后，你可以：
+
+1. 创建项目数据库
+2. 设计数据表结构
+3. 在 Node.js 项目中连接数据库
+4. 开始开发后端 API
+
+参考项目目录结构文档中的 models/ 目录，
+创建相应的数据表。
+
+
+========================================
+文档结束
+========================================
+

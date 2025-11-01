@@ -1,0 +1,338 @@
+========================================
+Homebrew 安装指南（macOS）
+========================================
+
+【什么是 Homebrew？】
+----------------------------------------
+Homebrew 是 macOS 的包管理器，类似于：
+- Windows 的 Chocolatey
+- Linux 的 apt（Ubuntu）或 yum（CentOS）
+
+它可以让你通过命令行轻松安装和管理各种软件包。
+
+
+【安装 Homebrew】
+----------------------------------------
+
+步骤1：打开终端（Terminal）
+--------------------------------
+1. 打开"应用程序" → "实用工具" → "终端"
+2. 或者按 Cmd + 空格键，搜索"终端"
+
+
+步骤2：执行安装命令
+--------------------------------
+复制以下命令到终端中执行：
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+
+步骤3：按提示操作
+--------------------------------
+安装过程中会提示：
+1. 按 Enter 键继续
+2. 可能需要输入管理员密码
+3. 等待安装完成（可能需要几分钟）
+
+
+步骤4：安装完成后，配置环境变量
+--------------------------------
+
+【对于 Apple Silicon Mac（M1/M2/M3）】
+--------------------------------
+执行以下命令：
+
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+【对于 Intel Mac】
+--------------------------------
+执行以下命令：
+
+echo 'eval "$(/usr/local/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/usr/local/bin/brew shellenv)"
+
+
+【或者如果是 bash shell（较老的系统）】
+--------------------------------
+如果使用的是 bash（而不是 zsh），使用：
+
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
+source ~/.bash_profile
+
+
+步骤5：验证安装
+--------------------------------
+执行以下命令检查 Homebrew 是否安装成功：
+
+brew --version
+
+如果显示版本号（如：Homebrew 4.x.x），说明安装成功！
+
+
+【使用 Homebrew】
+----------------------------------------
+
+基本命令
+--------------------------------
+# 搜索软件包
+brew search 软件名
+
+# 安装软件
+brew install 软件名
+
+# 卸载软件
+brew uninstall 软件名
+
+# 更新 Homebrew
+brew update
+
+# 升级已安装的软件
+brew upgrade
+
+# 查看已安装的软件
+brew list
+
+# 查看软件信息
+brew info 软件名
+
+
+常用软件安装示例
+--------------------------------
+
+# 安装 Node.js
+brew install node
+
+# 安装 MySQL
+brew install mysql
+
+# 安装 Git（如果还没有）
+brew install git
+
+# 安装 Redis（如果需要）
+brew install redis
+
+# 安装 MongoDB（如果需要）
+brew install mongodb-community
+
+# 安装 Python（如果需要）
+brew install python
+
+# 安装 Java（如果需要）
+brew install openjdk
+
+
+【安装项目所需的软件】
+----------------------------------------
+
+对于商城小程序项目，你需要安装：
+
+1. Node.js（必须）
+--------------------------------
+brew install node
+
+验证安装：
+node --version
+npm --version
+
+
+2. MySQL（必须）
+--------------------------------
+brew install mysql
+
+启动 MySQL：
+brew services start mysql
+
+设置密码：
+mysql_secure_installation
+
+
+3. Git（必须，用于版本控制）
+--------------------------------
+brew install git
+
+验证安装：
+git --version
+
+
+【常见问题解决】
+----------------------------------------
+
+问题1：安装命令提示"command not found: curl"
+--------------------------------
+解决方法：
+1. macOS 系统应该自带 curl，如果提示找不到，可能是 PATH 配置问题
+2. 检查网络连接
+3. 尝试手动下载安装脚本
+
+
+问题2：安装时提示权限不足
+--------------------------------
+解决方法：
+1. 确保有管理员权限
+2. 可能需要输入管理员密码
+3. 如果问题持续，检查用户权限设置
+
+
+问题3：安装后 brew 命令找不到
+--------------------------------
+解决方法：
+
+# 检查安装位置
+ls -la /opt/homebrew/bin/brew    # Apple Silicon Mac
+ls -la /usr/local/bin/brew        # Intel Mac
+
+# 如果存在，手动添加到 PATH
+# Apple Silicon Mac
+echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+
+# Intel Mac
+echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+
+
+问题4：安装很慢或失败
+--------------------------------
+解决方法：
+
+1. 检查网络连接
+2. 使用国内镜像源（推荐）
+
+# 使用清华大学镜像源
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+
+# 然后重新执行安装命令
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+或者安装后设置镜像：
+
+# 替换 Homebrew 源
+cd "$(brew --repo)"
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+
+cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+
+# 更新
+brew update
+
+
+问题5：安装时提示 Xcode Command Line Tools
+--------------------------------
+解决方法：
+
+# 先安装 Xcode Command Line Tools
+xcode-select --install
+
+# 等待安装完成后，再安装 Homebrew
+
+
+问题6：安装后提示需要同意许可协议
+--------------------------------
+解决方法：
+
+# 同意 Xcode 许可协议
+sudo xcodebuild -license accept
+
+
+【加速 Homebrew（可选，推荐）】
+----------------------------------------
+
+使用国内镜像源可以大大加快下载速度：
+
+# 替换 brew.git
+cd "$(brew --repo)"
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+
+# 替换 homebrew-core.git
+cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+
+# 替换 homebrew-bottles（二进制包）
+echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles' >> ~/.zshrc
+source ~/.zshrc
+
+# 更新
+brew update
+
+
+【验证安装环境】
+----------------------------------------
+
+完成安装后，执行以下命令验证：
+
+# 检查 Homebrew
+brew --version
+
+# 检查 Node.js（如果已安装）
+node --version
+npm --version
+
+# 检查 Git（如果已安装）
+git --version
+
+# 检查 MySQL（如果已安装）
+mysql --version
+
+
+【卸载 Homebrew（如果需要）】
+----------------------------------------
+
+如果以后需要卸载，执行：
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+
+注意：这会将 Homebrew 及其安装的所有软件都卸载。
+
+
+【下一步】
+----------------------------------------
+
+安装好 Homebrew 后，你可以：
+
+1. ✅ 安装 Node.js（项目必需）
+   brew install node
+
+2. ✅ 安装 MySQL（项目必需）
+   brew install mysql
+
+3. ✅ 安装 Git（版本控制）
+   brew install git
+
+4. ✅ 阅读《MySQL安装指南.txt》配置数据库
+
+5. ✅ 开始搭建项目开发环境
+
+
+【完整安装流程总结】
+----------------------------------------
+
+1. 打开终端
+2. 执行安装命令：
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+3. 配置环境变量（根据你的 Mac 类型选择）：
+   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+   eval "$(/opt/homebrew/bin/brew shellenv)"
+4. 验证安装：
+   brew --version
+5. 安装项目所需软件：
+   brew install node
+   brew install mysql
+   brew install git
+
+
+【提示】
+----------------------------------------
+- 安装过程可能需要 5-10 分钟，请耐心等待
+- 如果网络较慢，建议使用国内镜像源
+- 安装过程中可能需要输入管理员密码
+- 如果遇到问题，可以查看 Homebrew 官网：
+  https://brew.sh/
+
+========================================
+文档结束
+========================================
+

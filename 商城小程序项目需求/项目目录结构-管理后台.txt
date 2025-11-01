@@ -1,0 +1,353 @@
+========================================
+管理后台项目目录结构（全栈一体化）
+========================================
+
+admin-backend/                        # 管理后台根目录
+│
+├── package.json                      # 项目配置文件
+│                                     # - 项目名称、版本
+│                                     # - 前端和后端依赖
+│                                     # - 启动脚本
+│
+├── .env                             # 环境变量配置文件
+│                                     # - 数据库连接信息
+│                                     # - 管理员JWT密钥
+│                                     # - 服务器端口
+│
+├── .env.example                     # 环境变量示例文件
+│
+├── .gitignore                       # Git忽略文件配置
+│
+├── server.js                         # 后端服务器入口文件
+│                                     # - 启动Express服务器
+│                                     # - 静态文件服务（前端）
+│                                     # - API路由
+│
+├── public/                           # 前端静态文件目录（打包后的文件）
+│   ├── index.html                   # 前端入口HTML
+│   ├── css/                         # CSS文件
+│   ├── js/                          # JavaScript文件
+│   └── assets/                      # 静态资源（图片等）
+│
+├── frontend/                         # 前端源码目录（Vue.js项目）
+│   │
+│   ├── package.json                 # 前端依赖配置
+│   │
+│   ├── vue.config.js                # Vue项目配置
+│   │                                 # - 开发服务器配置
+│   │                                 # - 打包配置
+│   │
+│   ├── .env.development             # 开发环境配置
+│   │
+│   ├── .env.production              # 生产环境配置
+│   │
+│   ├── public/                      # 公共静态资源
+│   │   ├── index.html              # HTML模板
+│   │   └── favicon.ico             # 网站图标
+│   │
+│   ├── src/                         # 源代码目录
+│   │   │
+│   │   ├── main.js                 # 应用入口文件
+│   │   │                            # - 创建Vue实例
+│   │   │                            # - 注册全局组件
+│   │   │                            # - 引入路由和状态管理
+│   │   │
+│   │   ├── App.vue                 # 根组件
+│   │   │
+│   │   ├── router/                 # 路由配置目录
+│   │   │   ├── index.js           # 路由主文件
+│   │   │                           # - 定义所有路由
+│   │   │                           # - 路由守卫（权限验证）
+│   │   │
+│   │   ├── store/                  # 状态管理目录（Vuex）
+│   │   │   ├── index.js           # Store主文件
+│   │   │   ├── modules/           # 模块化Store
+│   │   │   │   ├── user.js        # 用户状态模块
+│   │   │   │   └── ...            # 其他模块
+│   │   │
+│   │   ├── views/                  # 页面组件目录
+│   │   │   │
+│   │   │   ├── Login.vue          # 登录页
+│   │   │   │
+│   │   │   ├── Dashboard.vue      # 首页（数据统计）
+│   │   │   │
+│   │   │   ├── goods/             # 商品管理模块
+│   │   │   │   ├── GoodsList.vue  # 商品列表页
+│   │   │   │   └── GoodsEdit.vue  # 商品编辑页
+│   │   │   │
+│   │   │   ├── category/          # 分类管理模块
+│   │   │   │   ├── CategoryList.vue
+│   │   │   │   └── CategoryEdit.vue
+│   │   │   │
+│   │   │   ├── banner/            # 轮播图管理模块
+│   │   │   │   ├── BannerList.vue
+│   │   │   │   └── BannerEdit.vue
+│   │   │   │
+│   │   │   ├── order/             # 订单管理模块
+│   │   │   │   ├── OrderList.vue
+│   │   │   │   └── OrderDetail.vue
+│   │   │   │
+│   │   │   ├── user/              # 用户管理模块
+│   │   │   │   ├── UserList.vue
+│   │   │   │   └── UserDetail.vue
+│   │   │   │
+│   │   │   └── settings/          # 设置模块
+│   │   │       └── ...
+│   │   │
+│   │   ├── components/            # 公共组件目录
+│   │   │   │
+│   │   │   ├── Layout/            # 布局组件
+│   │   │   │   ├── Header.vue    # 头部导航
+│   │   │   │   ├── Sidebar.vue   # 侧边栏
+│   │   │   │   └── Footer.vue    # 底部
+│   │   │   │
+│   │   │   ├── Table/             # 表格组件
+│   │   │   │   └── DataTable.vue
+│   │   │   │
+│   │   │   ├── Form/              # 表单组件
+│   │   │   │   └── ...
+│   │   │   │
+│   │   │   └── Upload/            # 上传组件
+│   │   │       └── ImageUpload.vue
+│   │   │
+│   │   ├── api/                   # API请求目录
+│   │   │   ├── index.js          # API请求封装
+│   │   │   │                       # - Axios配置
+│   │   │   │                       # - 请求拦截器
+│   │   │   │                       # - 响应拦截器
+│   │   │   │
+│   │   │   ├── goods.js          # 商品相关API
+│   │   │   ├── category.js        # 分类相关API
+│   │   │   ├── order.js           # 订单相关API
+│   │   │   ├── user.js            # 用户相关API
+│   │   │   ├── banner.js          # 轮播图相关API
+│   │   │   └── auth.js            # 认证相关API
+│   │   │
+│   │   ├── utils/                # 工具函数目录
+│   │   │   ├── request.js        # 请求工具
+│   │   │   ├── auth.js           # 认证工具
+│   │   │   ├── date.js           # 日期工具
+│   │   │   └── validate.js       # 验证工具
+│   │   │
+│   │   ├── styles/               # 样式目录
+│   │   │   ├── main.css          # 主样式文件
+│   │   │   ├── variables.css     # CSS变量
+│   │   │   └── ...
+│   │   │
+│   │   └── assets/               # 静态资源目录
+│   │       ├── images/           # 图片
+│   │       └── ...
+│   │
+│   └── dist/                       # 前端打包输出目录（构建后生成）
+│
+├── backend/                         # 后端源码目录
+│   │
+│   ├── routes/                      # 路由目录
+│   │   │
+│   │   ├── index.js                # 路由入口
+│   │   │
+│   │   ├── admin/                  # 管理后台路由
+│   │   │   ├── auth.js            # 管理员认证路由
+│   │   │   │                       # - POST /admin/auth/login
+│   │   │   │                       # - POST /admin/auth/logout
+│   │   │   │
+│   │   │   ├── goods.js           # 商品管理路由
+│   │   │   │                       # - GET /admin/goods/list
+│   │   │   │                       # - POST /admin/goods/save
+│   │   │   │                       # - DELETE /admin/goods/delete
+│   │   │   │
+│   │   │   ├── category.js        # 分类管理路由
+│   │   │   │
+│   │   │   ├── banner.js          # 轮播图管理路由
+│   │   │   │
+│   │   │   ├── order.js           # 订单管理路由
+│   │   │   │                       # - GET /admin/order/list
+│   │   │   │                       # - GET /admin/order/detail
+│   │   │   │                       # - POST /admin/order/deliver
+│   │   │   │
+│   │   │   ├── user.js            # 用户管理路由
+│   │   │   │
+│   │   │   ├── cart.js            # 购物车管理路由
+│   │   │   │
+│   │   │   ├── address.js        # 地址管理路由
+│   │   │   │
+│   │   │   └── stat.js           # 数据统计路由
+│   │   │                           # - GET /admin/stat/dashboard
+│   │   │
+│   │   └── upload.js              # 文件上传路由
+│   │                               # - POST /admin/upload/image
+│   │
+│   ├── controllers/                # 控制器目录
+│   │   │
+│   │   ├── admin/                  # 管理后台控制器
+│   │   │   ├── authController.js
+│   │   │   ├── goodsController.js
+│   │   │   ├── categoryController.js
+│   │   │   ├── bannerController.js
+│   │   │   ├── orderController.js
+│   │   │   ├── userController.js
+│   │   │   ├── cartController.js
+│   │   │   ├── addressController.js
+│   │   │   └── statController.js
+│   │   │
+│   │   └── uploadController.js     # 文件上传控制器
+│   │
+│   ├── middleware/                 # 中间件目录
+│   │   ├── auth.js                 # 管理员认证中间件
+│   │   ├── permission.js           # 权限验证中间件
+│   │   ├── errorHandler.js         # 错误处理中间件
+│   │   └── validator.js            # 参数验证中间件
+│   │
+│   ├── models/                      # 数据模型目录（与后端API共用）
+│   │   ├── Admin.js                # 管理员模型
+│   │   └── ...                     # 其他模型（商品、订单等）
+│   │
+│   ├── utils/                       # 工具函数目录
+│   │   ├── jwt.js                  # JWT工具
+│   │   ├── crypto.js               # 加密工具
+│   │   ├── response.js             # 响应格式化
+│   │   └── logger.js               # 日志工具
+│   │
+│   └── config/                      # 配置文件目录
+│       ├── index.js                # 主配置
+│       └── database.js             # 数据库配置
+│
+├── uploads/                          # 上传文件目录（运行时生成）
+│   ├── goods/                       # 商品图片
+│   ├── banner/                      # 轮播图
+│   └── ...
+│
+├── logs/                            # 日志目录（运行时生成）
+│
+├── tests/                           # 测试目录（可选）
+│
+└── README.md                        # 项目说明文档
+
+
+【重要文件说明】
+
+1. server.js - 后端服务器入口
+   主要功能：
+   - 启动Express服务器
+   - 静态文件服务（前端dist目录）
+   - 注册API路由
+   - 错误处理
+
+2. frontend/src/main.js - 前端入口
+   主要功能：
+   - 创建Vue实例
+   - 引入Element UI
+   - 注册路由
+   - 注册状态管理
+
+3. frontend/src/router/index.js - 路由配置
+   主要路由：
+   - /login - 登录页
+   - /dashboard - 首页（数据统计）
+   - /goods/list - 商品列表
+   - /goods/edit - 商品编辑
+   - /order/list - 订单列表
+   - /user/list - 用户列表
+   - ... 其他路由
+
+4. frontend/src/api/ - API请求封装
+   功能：
+   - 统一请求方法
+   - 自动添加Token
+   - 统一错误处理
+   - 未登录时跳转登录页
+
+5. frontend/src/store/ - 状态管理
+   主要状态：
+   - 用户信息（登录状态）
+   - 权限信息
+   - 其他全局状态
+
+6. backend/routes/admin/ - 管理后台API路由
+   所有路由以 /admin 开头
+   需要管理员认证
+
+
+【目录命名规范】
+
+1. 前端文件：使用驼峰命名法（PascalCase）
+   - 组件：GoodsList.vue、OrderDetail.vue
+   - 页面：Login.vue、Dashboard.vue
+
+2. 后端文件：使用驼峰命名法（camelCase）
+   - 控制器：goodsController.js
+   - 路由：goods.js
+
+3. 目录命名：使用小写字母
+   - 例如：components、views、controllers
+
+
+【开发流程】
+
+1. 前端开发
+   - 在 frontend/ 目录下开发
+   - 使用 npm run serve 启动开发服务器
+   - 使用 npm run build 打包前端代码
+
+2. 后端开发
+   - 在 backend/ 目录下开发
+   - 开发API接口
+   - 测试接口功能
+
+3. 部署
+   - 先打包前端：npm run build
+   - 打包后的文件在 frontend/dist/
+   - 将 dist/ 目录内容复制到 public/
+   - 启动后端服务：node server.js
+   - 访问 http://localhost:端口号
+
+
+【前端页面结构示例】
+
+1. 商品列表页（GoodsList.vue）
+   - 顶部：搜索栏、筛选条件
+   - 中间：商品表格（使用Element UI Table组件）
+   - 底部：分页组件
+   - 操作：编辑、删除、上下架按钮
+
+2. 商品编辑页（GoodsEdit.vue）
+   - 表单：商品名称、价格、库存等
+   - 图片上传：主图、轮播图
+   - 操作：保存、取消按钮
+
+3. 订单列表页（OrderList.vue）
+   - 顶部：搜索栏、订单状态筛选
+   - 中间：订单表格
+   - 底部：分页组件
+   - 操作：查看详情、发货按钮
+
+4. 数据统计页（Dashboard.vue）
+   - 顶部：核心指标卡片（订单数、销售额等）
+   - 中间：图表（使用ECharts）
+   - 底部：数据表格
+
+
+【技术栈说明】
+
+1. 前端
+   - Vue.js：前端框架
+   - Vue Router：路由管理
+   - Vuex：状态管理（可选）
+   - Element UI：UI组件库
+   - Axios：HTTP请求
+   - ECharts：数据可视化
+
+2. 后端
+   - Node.js + Express：服务端框架
+   - MySQL/MongoDB：数据库
+   - JWT：管理员认证
+   - Multer：文件上传处理
+
+3. 部署
+   - PM2：进程管理
+   - Nginx：反向代理（可选）
+
+========================================
+文档结束
+========================================
+

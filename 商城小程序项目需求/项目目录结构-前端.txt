@@ -1,0 +1,222 @@
+========================================
+商城小程序前端项目目录结构
+========================================
+
+miniprogram/                          # 小程序根目录
+│
+├── app.json                          # 小程序配置文件
+│                                     # - 配置页面路径
+│                                     # - 配置底部导航栏
+│                                     # - 配置窗口样式
+│
+├── app.js                            # 小程序入口文件
+│                                     # - 应用启动逻辑
+│                                     # - 全局数据管理
+│                                     # - 用户登录状态管理
+│
+├── app.wxss                          # 全局样式文件
+│                                     # - 全局CSS样式
+│                                     # - 公共样式类
+│
+├── sitemap.json                      # 小程序搜索配置
+│
+├── project.config.json               # 项目配置文件
+│
+├── pages/                            # 页面目录
+│   │
+│   ├── index/                        # 首页
+│   │   ├── index.wxml               # 页面结构
+│   │   ├── index.wxss              # 页面样式
+│   │   ├── index.js                # 页面逻辑
+│   │   └── index.json              # 页面配置
+│   │
+│   ├── category/                     # 分类页
+│   │   ├── category.wxml
+│   │   ├── category.wxss
+│   │   ├── category.js
+│   │   └── category.json
+│   │
+│   ├── category-list/                # 分类商品列表页
+│   │   ├── category-list.wxml
+│   │   ├── category-list.wxss
+│   │   ├── category-list.js
+│   │   └── category-list.json
+│   │
+│   ├── goods-detail/                 # 商品详情页
+│   │   ├── goods-detail.wxml
+│   │   ├── goods-detail.wxss
+│   │   ├── goods-detail.js
+│   │   └── goods-detail.json
+│   │
+│   ├── cart/                         # 购物车页
+│   │   ├── cart.wxml
+│   │   ├── cart.wxss
+│   │   ├── cart.js
+│   │   └── cart.json
+│   │
+│   ├── order-confirm/                # 订单确认页
+│   │   ├── order-confirm.wxml
+│   │   ├── order-confirm.wxss
+│   │   ├── order-confirm.js
+│   │   └── order-confirm.json
+│   │
+│   ├── order-list/                   # 订单列表页
+│   │   ├── order-list.wxml
+│   │   ├── order-list.wxss
+│   │   ├── order-list.js
+│   │   └── order-list.json
+│   │
+│   ├── order-detail/                 # 订单详情页
+│   │   ├── order-detail.wxml
+│   │   ├── order-detail.wxss
+│   │   ├── order-detail.js
+│   │   └── order-detail.json
+│   │
+│   ├── profile/                       # 我的页面
+│   │   ├── profile.wxml
+│   │   ├── profile.wxss
+│   │   ├── profile.js
+│   │   └── profile.json
+│   │
+│   ├── address-list/                 # 收货地址列表页
+│   │   ├── address-list.wxml
+│   │   ├── address-list.wxss
+│   │   ├── address-list.js
+│   │   └── address-list.json
+│   │
+│   └── address-edit/                 # 收货地址编辑页
+│       ├── address-edit.wxml
+│       ├── address-edit.wxss
+│       ├── address-edit.js
+│       └── address-edit.json
+│
+├── components/                       # 组件目录（可复用组件）
+│   │
+│   ├── goods-card/                   # 商品卡片组件
+│   │   ├── goods-card.wxml
+│   │   ├── goods-card.wxss
+│   │   ├── goods-card.js
+│   │   └── goods-card.json
+│   │
+│   ├── banner/                       # 轮播图组件
+│   │   ├── banner.wxml
+│   │   ├── banner.wxss
+│   │   ├── banner.js
+│   │   └── banner.json
+│   │
+│   └── loading/                      # 加载中组件
+│       ├── loading.wxml
+│       ├── loading.wxss
+│       ├── loading.js
+│       └── loading.json
+│
+├── utils/                            # 工具函数目录
+│   │
+│   ├── api.js                        # API请求封装
+│   │                                 # - 统一请求方法
+│   │                                 # - 请求拦截器
+│   │                                 # - 响应拦截器
+│   │                                 # - 错误处理
+│   │
+│   ├── util.js                       # 通用工具函数
+│   │                                 # - 日期格式化
+│   │                                 # - 价格格式化
+│   │                                 # - 数据验证
+│   │
+│   ├── auth.js                       # 用户认证相关
+│   │                                 # - 登录状态检查
+│   │                                 # - Token管理
+│   │                                 # - 用户信息存储
+│   │
+│   └── constants.js                 # 常量定义
+│                                   # - API地址
+│                                   # - 订单状态
+│                                   # - 其他常量
+│
+├── images/                           # 图片资源目录
+│   ├── logo.png
+│   ├── default-avatar.png
+│   └── ...
+│
+├── styles/                           # 公共样式目录（可选）
+│   ├── common.wxss                  # 公共样式
+│   └── variables.wxss               # 样式变量（颜色、字体等）
+│
+└── config/                           # 配置文件目录（可选）
+    ├── env.js                       # 环境配置（开发/生产）
+    └── api.js                       # API地址配置
+
+
+【重要文件说明】
+
+1. app.json - 小程序全局配置
+   配置内容：
+   - pages: 所有页面路径
+   - window: 窗口样式（导航栏、背景色等）
+   - tabBar: 底部导航栏配置
+   - networkTimeout: 网络请求超时时间
+
+2. app.js - 应用入口
+   主要功能：
+   - onLaunch: 应用启动时执行
+   - onShow: 应用显示时执行
+   - globalData: 全局数据（用户信息等）
+
+3. utils/api.js - 网络请求封装
+   示例代码结构：
+   - request() 函数：统一请求方法
+   - 自动添加Token
+   - 统一错误处理
+   - 自动跳转登录页（未登录时）
+
+4. 页面文件结构
+   每个页面包含4个文件：
+   - .wxml: 页面结构（类似HTML）
+   - .wxss: 页面样式（类似CSS）
+   - .js: 页面逻辑（JavaScript）
+   - .json: 页面配置
+
+
+【目录命名规范】
+
+1. 页面目录：使用小写字母，多个单词用连字符（-）分隔
+   - 例如：goods-detail、order-list
+
+2. 组件目录：使用小写字母，多个单词用连字符（-）分隔
+   - 例如：goods-card、order-item
+
+3. 工具文件：使用小写字母，多个单词用连字符（-）或驼峰命名
+   - 例如：api.js、util.js、auth.js
+
+
+【开发建议】
+
+1. 页面开发顺序
+   - 先开发首页（浏览商品）
+   - 再开发商品详情页
+   - 然后开发购物车和订单相关页面
+   - 最后开发个人中心相关页面
+
+2. 组件复用
+   - 商品卡片组件可在多个页面复用
+   - 轮播图组件可在首页和分类页复用
+   - 加载中组件在所有列表页复用
+
+3. API调用
+   - 统一使用 utils/api.js 中的方法
+   - 所有API调用都做错误处理
+   - 未登录时自动跳转登录页
+
+4. 数据管理
+   - 简单的全局数据放在 app.js 的 globalData
+   - 复杂的数据管理可以使用状态管理库（如：MobX）
+
+5. 样式管理
+   - 公共样式放在 app.wxss
+   - 页面特定样式放在各自的 .wxss 文件
+   - 使用统一的颜色和字体变量
+
+========================================
+文档结束
+========================================
+
